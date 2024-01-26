@@ -1,0 +1,14 @@
+.card_link {
+  text-decoration: none;
+}
+/* 不能放在hover中,transition必须放在原始元素上 */
+.card img {
+  transition: all 1s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+.card:hover-leave img {
+  transform: scale(1);
+}

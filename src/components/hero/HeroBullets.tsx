@@ -6,13 +6,14 @@ import {
   Group,
   Text,
   List,
+  ListItem,
   ThemeIcon,
   rem,
 } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
-import image from "../../assets/image.svg";
+import image from "../../../public/image.svg";
 import classes from "./HeroBullets.module.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export function HeroBullets() {
   return (
@@ -42,22 +43,22 @@ export function HeroBullets() {
               </ThemeIcon>
             }
           >
-            <List.Item>
+            <ListItem>
               <b>TypeScript based</b> – build type safe applications, all
               components and hooks export types
-            </List.Item>
-            <List.Item>
+            </ListItem>
+            <ListItem>
               <b>Free and open source</b> – all packages have MIT license, you
               can use Mantine in any project
-            </List.Item>
-            <List.Item>
+            </ListItem>
+            <ListItem>
               <b>No annoying focus ring</b> – focus ring will appear only when
               user navigates with keyboard
-            </List.Item>
+            </ListItem>
           </List>
 
           <Group mt={30}>
-            <Link to="/headers">
+            <Link href="/headers">
               <Button radius="xl" size="md" className={classes.control}>
                 Get started
               </Button>
@@ -73,7 +74,7 @@ export function HeroBullets() {
             </Button>
           </Group>
         </div>
-        <Image src={image} className={classes.image} />
+        <Image src={image.src} className={classes.image} />
       </div>
     </Container>
   );
