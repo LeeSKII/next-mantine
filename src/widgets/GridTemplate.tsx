@@ -18,6 +18,7 @@ export default function GridTemplate({
   const items = data.map((item) => {
     return (
       <LinkCard
+        key={item.name}
         name={item.name}
         num={item.num}
         link={item.link}
