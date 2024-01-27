@@ -49,3 +49,29 @@ export async function ServerComponentsInHeader2() {
     </>
   );
 }
+
+export async function ServerComponentsInHeader3() {
+  return (
+    <>
+      <div>Api Collection:</div>
+      <div>
+        <a
+          href="https://cloud.tencent.com/developer/article/2081636"
+          target="_blank"
+        >
+          https://cloud.tencent.com/developer/article/2081636
+        </a>
+      </div>
+      <div>
+        <a href="https://api.oioweb.cn/" target="_blank">
+          api1
+        </a>
+      </div>
+      <div>
+        <a href="https://api.uomg.com/" target="_blank">
+          api2
+        </a>
+      </div>
+    </>
+  );
+}
