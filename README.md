@@ -22,15 +22,21 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+1. 客户端组件调用接口，文档中写的是 call route handle，实际上就是用 effect 或者是 swr 取请求接口，但是这样是不符合 seo 的，合理的做法是在客户端组件中包装一个服务端组件，服务端组件调用接口，客户端组件接受服务端组件的 props，这样既符合 seo，又符合组件复用。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.当需要服务端组件在每次请求都刷新时，可以使用如下：
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+Opting out of Data Caching
+fetch requests are not cached if:
 
-## Deploy on Vercel
+The cache: 'no-store' is added to fetch requests.
+The revalidate: 0 option is added to individual fetch requests.
+The fetch request is inside a Router Handler that uses the POST method.
+The fetch request comes after the usage of headers or cookies.
+The const dynamic = 'force-dynamic' route segment option is used.
+The fetchCache route segment option is configured to skip cache by default.
+The fetch request uses Authorization or Cookie headers and there's an uncached request above it in the component tree.
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+实际上使用第一个方法即可，即在 fetch 请求中添加 cache: 'no-store' 选项。

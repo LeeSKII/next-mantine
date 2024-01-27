@@ -10,10 +10,11 @@ import classes from "./Headers.module.css";
 
 import Link from "next/link";
 
-export default function Headers() {
+export default function Headers({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Container size={"md"}>
+        {children}
         <Title>
           <Link href="/#main">Back to all categories</Link>
         </Title>
