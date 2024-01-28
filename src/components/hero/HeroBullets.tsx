@@ -64,14 +64,16 @@ export function HeroBullets() {
               </Button>
             </Link>
 
-            <Button
-              variant="default"
-              radius="xl"
-              size="md"
-              className={classes.control}
-            >
-              Source code
-            </Button>
+            <Link href="/api">
+              <Button
+                variant="default"
+                radius="xl"
+                size="md"
+                className={classes.control}
+              >
+                Api Browser
+              </Button>
+            </Link>
           </Group>
         </div>
         <Image src={image.src} className={classes.image} />

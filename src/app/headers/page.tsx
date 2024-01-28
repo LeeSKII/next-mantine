@@ -4,7 +4,7 @@ import {
   ServerComponentsInHeader,
   ServerComponentsInHeader2,
   ServerComponentsInHeader3,
-} from "@/widgets/ServerComponentsInHeader";
+} from "./ServerComponentsInHeader";
 
 export default function Home() {
   return (

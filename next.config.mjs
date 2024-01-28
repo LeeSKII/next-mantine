@@ -8,6 +8,16 @@ const nextConfig = {
         port: '',
         pathname: '/image/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'bbs-static.miyoushe.com',
+        
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload-bbs.miyoushe.com',
+        
+      },
     ],
   },
 };
