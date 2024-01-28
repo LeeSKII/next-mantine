@@ -13,6 +13,9 @@ import Link from "next/link";
 import RandomInfo from "@/app/api/random-info/page";
 import Nows from "@/app/api/nows/page";
 
+import { connect } from "@/models/connect";
+import weather from "@/models/weather";
+
 type ApiItem = {
   name: string;
   src: string;
@@ -35,7 +38,13 @@ const apiData: ApiItem[] = [
 
 export const dynamic = "force-dynamic";
 
-export default function ApiBrowser() {
+const getLastWeather = async (num: number) => {
+  connect();
+  const res = await weather.find().limit(num).sort({ spider_time: -1 });
+  return res;
+};
+
+export default async function ApiBrowser() {
   const ApiList = apiData.map((item) => {
     return (
       <Link
@@ -51,6 +60,19 @@ export default function ApiBrowser() {
       </Link>
     );
   });
+
+  //获取天气数据
+  const weatherData = await getLastWeather(1);
+
+  const WeeklyItems = weatherData[0].weeklyWeatherArr.map((item) => {
+    return (
+      <div key={item._id}>
+        {item.week}-{item.dateInfo}-{item.upWindTemperature}-
+        {item.downWindTemperature}
+      </div>
+    );
+  });
+
   return (
     <>
       <Container size={"md"}>
@@ -73,6 +95,11 @@ export default function ApiBrowser() {
         <Divider mt={10}></Divider>
         <Box>
           <Nows></Nows>
+        </Box>
+        <Box>
+          <Title order={2}>Weather</Title>
+          {weatherData && weatherData[0].spider_time}
+          {weatherData && WeeklyItems}
         </Box>
       </Container>
     </>
