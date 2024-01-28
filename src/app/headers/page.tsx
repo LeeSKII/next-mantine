@@ -6,6 +6,8 @@ import {
   ServerComponentsInHeader3,
 } from "./ServerComponentsInHeader";
 
+export const revalidate = 0; // 每次请求时，重新验证页面
+
 export default function Home() {
   return (
     <>
