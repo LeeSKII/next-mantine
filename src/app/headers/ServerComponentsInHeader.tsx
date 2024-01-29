@@ -59,7 +59,7 @@ export async function ServerComponentsInHeader3() {
           href="https://cloud.tencent.com/developer/article/2081636"
           target="_blank"
         >
-          https://cloud.tencent.com/developer/article/2081636
+          page
         </a>
       </div>
       <div>
