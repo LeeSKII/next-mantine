@@ -35,7 +35,7 @@ export default function NavBarsPage() {
             <Title order={2}>Go Back</Title>
           </Link>
         </Paper>
-        <Stack gap={20}>
+        <Stack mb={100} gap={20}>
           <NavBars></NavBars>
         </Stack>
       </Container>
