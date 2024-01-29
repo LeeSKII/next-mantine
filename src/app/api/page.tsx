@@ -40,7 +40,12 @@ const apiData: ApiItem[] = [
 export const dynamic = "force-dynamic";
 
 const getLastWeather = async (num: number) => {
-  await connect();
+  try {
+    await connect();
+  } catch (error) {
+    if (error instanceof Error) return error;
+  }
+
   const res = await weather.find().limit(num).sort({ spider_time: -1 });
   return res;
 };
@@ -65,14 +70,19 @@ export default async function ApiBrowser() {
   //获取天气数据
   const weatherData = await getLastWeather(1);
 
-  const WeeklyItems = weatherData[0].weeklyWeatherArr.map((item: any) => {
-    return (
-      <div key={item.dateInfo}>
-        {item.week}-{item.dateInfo}-{item.upWindTemperature}-
-        {item.downWindTemperature}
-      </div>
-    );
-  });
+  let WeeklyItems = <></>;
+  if (weatherData instanceof Error) {
+    WeeklyItems = <Text size="md">{weatherData.message}</Text>;
+  } else {
+    WeeklyItems = weatherData[0].weeklyWeatherArr.map((item: any) => {
+      return (
+        <div key={item.dateInfo}>
+          {item.week}-{item.dateInfo}-{item.upWindTemperature}-
+          {item.downWindTemperature}
+        </div>
+      );
+    });
+  }
 
   return (
     <>
@@ -99,7 +109,7 @@ export default async function ApiBrowser() {
         </Box>
         <Box>
           <Title order={2}>Weather</Title>
-          {weatherData && weatherData[0].spider_time}
+          {weatherData instanceof Array && weatherData[0].spider_time}
           {weatherData && WeeklyItems}
         </Box>
       </Container>
