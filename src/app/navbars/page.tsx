@@ -1,34 +1,42 @@
-import { Container, Title, Text, Box, Stack, Divider } from "@mantine/core";
+import {
+  Container,
+  Title,
+  Text,
+  Box,
+  Stack,
+  Divider,
+  Center,
+  Paper,
+} from "@mantine/core";
 
 import Link from "next/link";
 
-import DoubleNavbar from "@/components/navbars/DoubleNavbar";
-import NavbarLinksGroup from "@/components/navbars/NavbarLinksGroup";
+import NavBars from "@/components/navbars/NavBars";
 
-export default function NavBars() {
+export default function NavBarsPage() {
   return (
     <>
       <Container>
-        <Box my={50}>
-          <Link href={"/#main"}>
+        <Paper
+          my={50}
+          p={20}
+          shadow="xs"
+          radius={"lg"}
+          style={{
+            position: "sticky",
+            top: -1,
+            zIndex: 50,
+          }}
+        >
+          <Link
+            href={"/#main"}
+            style={{ textDecorationLine: "none", color: "WindowText" }}
+          >
             <Title order={2}>Go Back</Title>
           </Link>
-        </Box>
+        </Paper>
         <Stack gap={20}>
-          <Box>
-            <Text mb={20} size="md" fw={700}>
-              Navbar with 2 sections
-            </Text>
-            <DoubleNavbar></DoubleNavbar>
-            <Divider mt={20}></Divider>
-          </Box>
-          <Box maw={300}>
-            <Text mb={20} size="md" fw={700}>
-              Collapsible links group
-            </Text>
-            <NavbarLinksGroup></NavbarLinksGroup>
-            <Divider></Divider>
-          </Box>
+          <NavBars></NavBars>
         </Stack>
       </Container>
     </>
