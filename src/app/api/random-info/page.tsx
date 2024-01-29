@@ -125,7 +125,6 @@ const mockData = [
 
 // 强制每次路由进入都动态刷新
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export default function RandomInfo() {
   const selected = Math.random() * mockData.length;
