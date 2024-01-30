@@ -94,3 +94,54 @@ export default function Page({ params }: { params: { slug: string } }) {
 这种写法可以实现类似验证 token 然后获取相关信息，然后再 redirect 到指定页面
 
 参考`app/api/blog/route.ts`
+
+8.orm prisma
+
+安装
+
+`npm install @prisma/client`
+
+全局定义 prisma 连接对象
+
+```
+import { PrismaClient } from '@prisma/client';
+
+let prisma: PrismaClient;
+
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+}
+
+export default prisma;
+```
+
+使用的时候
+
+引入
+
+`import prisma from '../../lib/prisma';`
+
+```
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const post = await prisma.post.findUnique({
+    where: {
+      id: String(params?.id),
+    },
+    include: {
+      author: {
+        select: { name: true },
+      },
+    },
+  });
+  return {
+    props: post,
+  };
+};
+```
+
+参考链接 'https://vercel.com/guides/nextjs-prisma-postgres'
