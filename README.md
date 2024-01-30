@@ -84,3 +84,13 @@ export default function Page({ params }: { params: { slug: string } }) {
   return <div>My Post: {params.slug}</div>
 }
 ```
+
+6.页面传参
+
+参考`app/blog/search-params/[slug]/page.ts`的写法
+
+7.路由传参
+
+这种写法可以实现类似验证 token 然后获取相关信息，然后再 redirect 到指定页面
+
+参考`app/api/blog/route.ts`
