@@ -8,6 +8,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bbs-static.miyoushe.com"),
   title: "This is Title",
   description: "This is description",
   openGraph: {
@@ -17,12 +18,12 @@ export const metadata: Metadata = {
     siteName: "Next.js",
     images: [
       {
-        url: "https://bbs-static.miyoushe.com/static/2023/11/03/6ce65ace05f501e8f6af3616dea1c634_1107629373726729394.png", // Must be an absolute URL
+        url: "/static/2023/11/03/6ce65ace05f501e8f6af3616dea1c634_1107629373726729394.png", // Must be an absolute URL
         width: 200,
         height: 200,
       },
       {
-        url: "https://bbs-static.miyoushe.com/communityweb/upload/1cc889fcba3e2686d6cce7c90d8ed5a4.png", // Must be an absolute URL
+        url: "/communityweb/upload/1cc889fcba3e2686d6cce7c90d8ed5a4.png", // Must be an absolute URL
         width: 200,
         height: 200,
         alt: "My custom alt",
