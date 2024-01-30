@@ -44,3 +44,43 @@ The fetch request uses Authorization or Cookie headers and there's an uncached r
 3.shareability 分享的设置
 
 metadata 中设置 openGraph,分享卡片会取用这些信息，如 'title', 'description', 'image'这三个信息会显示在钉钉分享的链接里面。
+
+4.server side 中进行数据库的数据查询和获取
+
+之前是 page 路由的时候需要使用`getServerSideProps`然后再传给组件
+
+现在使用 app 路由直接获取数据即可，示例代码如下：
+
+```
+// `app` directory
+
+// This function can be named anything
+async function getProjects() {
+  const res = await fetch(`https://...`, { cache: 'no-store' })
+  const projects = await res.json()
+
+  return projects
+}
+
+export default async function Dashboard() {
+  const projects = await getProjects()
+
+  return (
+    <ul>
+      {projects.map((project) => (
+        <li key={project.id}>{project.name}</li>
+      ))}
+    </ul>
+  )
+}
+```
+
+5.路由传参
+
+`app/blog/[slug]/page.js`
+
+```
+export default function Page({ params }: { params: { slug: string } }) {
+  return <div>My Post: {params.slug}</div>
+}
+```
