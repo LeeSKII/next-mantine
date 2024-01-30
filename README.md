@@ -40,3 +40,7 @@ The fetch request uses Authorization or Cookie headers and there's an uncached r
 ```
 
 实际上使用第一个方法即可，即在 fetch 请求中添加 cache: 'no-store' 选项。
+
+3.shareability 分享的设置
+
+metadata 中设置 openGraph,分享卡片会取用这些信息，如 'title', 'description', 'image'这三个信息会显示在钉钉分享的链接里面。
