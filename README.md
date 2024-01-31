@@ -89,6 +89,20 @@ export default function Page({ params }: { params: { slug: string } }) {
 
 参考`app/blog/search-params/[slug]/page.ts`的写法
 
+页面传参默认的数据类型是`{ params: {}, searchParams: {} }`
+
+typescript 的写法
+
+```
+export default function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+})
+```
+
 7.路由传参
 
 这种写法可以实现类似验证 token 然后获取相关信息，然后再 redirect 到指定页面
