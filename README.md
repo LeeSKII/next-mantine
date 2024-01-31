@@ -227,3 +227,30 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 ```
 
 参考链接 'https://vercel.com/guides/nextjs-prisma-postgres'
+
+9. Image 在 Next.js 中的使用
+
+9.1 Responsive image using a static import 设置图片的响应式尺寸
+
+If the source image is not dynamic, you can statically import to create a responsive image:
+
+```
+import Image from 'next/image'
+import me from '../photos/me.jpg'
+
+export default function Author() {
+  return (
+    <Image
+      src={me}
+      alt="Picture of the author"
+      sizes="100vw"
+      style={{
+        width: '100%',
+        height: 'auto',
+      }}
+    />
+  )
+}
+```
+
+参考链接：'https://nextjs.org/docs/app/api-reference/components/image'
