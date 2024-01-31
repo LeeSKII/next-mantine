@@ -111,6 +111,74 @@ export default function Page({
 
 8.orm prisma
 
+参考文档：'https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases-typescript-mysql'
+
+8.1 首先安装开发依赖
+
+`npm install prisma --save-dev`
+
+8.2 初始化 schema 文件
+
+`npx prisma init`
+
+8.3 修改配置文件`schema.prisma`，连接数据库
+
+```
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+```
+
+通常情况下可以使用环境变量，修改`.env`文件
+
+```
+DATABASE_URL="mysql://johndoe:randompassword@localhost:3306/mydb"
+```
+
+8.4 将数据库对应的 schema 结构拉下来
+
+`npx prisma db pull`
+
+8.5 安装 prisma client
+
+`npm install @prisma/client`
+
+8.6 生成 prisma 模型
+
+`npx prisma generate`
+
+注意的是，在每次执行完`npx prisma db pull`之后，都需要执行`npx prisma generate`，否则会报错
+
+8.7 开始查询
+
+8.8 问题
+
+在 VsCode 中 prisma 报错`Cannot find module '@prisma/client' or its corresponding type declarations.` 不会影响使用；
+
+在 Next.js 中使用可以参考官网的客户端写法
+
+`lib/prisma.ts`
+
+```
+import { PrismaClient } from "@prisma/client";
+
+const prismaClientSingleton = () => {
+  return new PrismaClient();
+};
+
+declare global {
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+}
+
+const prisma = globalThis.prisma ?? prismaClientSingleton();
+
+export default prisma;
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
+
+```
+
 安装
 
 `npm install @prisma/client`
