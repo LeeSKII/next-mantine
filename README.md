@@ -261,4 +261,29 @@ export default function Author() {
 
 以及身份验证章节，使用中间件保护路由，链接：'https://nextjs.org/docs/app/building-your-application/authentication'
 
+上述链接中包含了考虑安全性的几个要点，参考原文：`To ensure comprehensive security, consider the following key areas:`
+
+身份验证示例用法:
+
+```
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const currentUser = request.cookies.get('currentUser')?.value
+
+  if (currentUser) {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+  return NextResponse.redirect(new URL('/login', request.url))
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+}
+```
+
 Tips：`Middleware`章节中最后的 runtime 写到只能在 Edge Runtime 中使用，但是实际在 Nodejs 中是可以使用的。
+
+// ToDo:unread
+身份验证和网站安全设置的链接 Blog:'https://nextjs.org/blog/security-nextjs-server-components-actions#data-access-layer'
