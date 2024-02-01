@@ -254,3 +254,11 @@ export default function Author() {
 ```
 
 参考链接：'https://nextjs.org/docs/app/api-reference/components/image'
+
+10. middleware 中间件用法
+
+参考`Middleware`章节
+
+以及身份验证章节，使用中间件保护路由，链接：'https://nextjs.org/docs/app/building-your-application/authentication'
+
+Tips：`Middleware`章节中最后的 runtime 写到只能在 Edge Runtime 中使用，但是实际在 Nodejs 中是可以使用的。
