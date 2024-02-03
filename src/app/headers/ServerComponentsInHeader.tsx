@@ -26,11 +26,11 @@ export async function ServerComponentsInHeader() {
   const data: OneDayEnglishResponse = await res.json();
   return (
     <>
-      <div>{data.result.content}</div>
-      <div>{data.result.note}</div>
+      <div>{data && data.result && data.result?.content}</div>
+      <div>{data && data.result && data.result?.note}</div>
       <Image
-        src={data.result.img}
-        alt={data.result.content}
+        src={data.result?.img}
+        alt={data.result?.content}
         width={200}
         height={300}
       ></Image>

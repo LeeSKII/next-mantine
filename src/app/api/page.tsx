@@ -15,7 +15,7 @@ import Nows from "@/app/api/nows/page";
 
 import connect from "@/models/connect";
 import weather from "@/models/weather";
-import { json } from "stream/consumers";
+import { Suspense } from "react";
 
 type ApiItem = {
   name: string;
@@ -97,7 +97,7 @@ export default async function ApiBrowser() {
           <Title>API Browser</Title>
         </Box>
         <SimpleGrid mt={20} cols={{ base: 1, sm: 2, md: 3 }}>
-          {ApiList}
+          <Suspense fallback={"<>Loading</>"}>{ApiList}</Suspense>
         </SimpleGrid>
         <Divider mt={10}></Divider>
         <Box mt={20}>
