@@ -287,3 +287,20 @@ Tips：`Middleware`章节中最后的 runtime 写到只能在 Edge Runtime 中�
 
 // ToDo:unread
 身份验证和网站安全设置的链接 Blog:'https://nextjs.org/blog/security-nextjs-server-components-actions#data-access-layer'
+
+11. loading UI 和 steaming
+
+可以在 app 路由中的 url path 文件夹中增加 loading.tsx 文件，在文件中编写 UI，然后每次有 link 进入到该页面和其内部的嵌套页面时，next 在页面跳转期间会自动加载该 UI 指示正在进行页面跳转，不至于是默认显示白屏，提高用户体验度。
+
+Streaming 解决了 SSR 的局限性问题，必须等待整个页面加载完毕才能返回全部的数据，这意味着如果整个页面中有多个部分的数据需要请求多个接口，那么用户必须等待所有接口都返回数据后才能看到页面。
+
+Streaming 可以解决这个问题，它允许服务器在接收到请求后立即返回部分数据，而不是等待所有数据都准备好后再返回。这样用户就可以在页面加载过程中看到部分数据，提高用户体验度。
+
+Streaming 的实现是通过`react`提供的`<Suspense></Suspense>`标签实现，在`<Suspense></Suspense>`标签中 的 fallback 属性可以设置 UI 指示该部分正在加载，当服务器数据加载完毕后，再将这部分的页面内容 stream 传输到主页面上。
+
+benefit:
+
+1.Streaming Server Rendering - Progressively rendering HTML from the server to the client.
+2.Selective Hydration - React prioritizes what components to make interactive first based on user interaction.
+
+参考链接：'https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming'
