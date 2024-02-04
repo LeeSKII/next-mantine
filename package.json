@@ -12,6 +12,7 @@
     "@mantine/core": "^7.4.2",
     "@mantine/hooks": "^7.4.2",
     "@mantinex/mantine-logo": "^1.0.1",
+    "@prisma/client": "^5.9.1",
     "@tabler/icons-react": "^2.46.0",
     "mongoose": "^8.1.1",
     "next": "14.1.0",
@@ -29,6 +30,7 @@
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",
     "postcss-simple-vars": "^7.0.1",
+    "prisma": "^5.9.1",
     "typescript": "^5"
   }
 }
