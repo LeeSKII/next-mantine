@@ -14,7 +14,8 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 
 export default function Page() {
-  const [value, setValue] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [visible, { toggle }] = useDisclosure(false);
 
   return (
@@ -26,16 +27,31 @@ export default function Page() {
             <Paper>
               <Stack>
                 <Input.Wrapper label="User Name:">
-                  <Input placeholder="Input inside Input.Wrapper" />
+                  <Input
+                    value={userName}
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                    placeholder="Input inside Input.Wrapper"
+                  />
                 </Input.Wrapper>
                 <PasswordInput
                   label="Password:"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   visible={visible}
                   onVisibilityChange={toggle}
                 />
                 <Center>
                   {" "}
-                  <Button size="sm">Sign In</Button>
+                  <Button
+                    onClick={() => console.log(userName, password)}
+                    size="sm"
+                  >
+                    Sign In
+                  </Button>
                   <Space w={"md"}></Space>
                   <Button size="sm">Sign Up</Button>
                 </Center>

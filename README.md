@@ -301,6 +301,29 @@ Streaming 的实现是通过`react`提供的`<Suspense></Suspense>`标签实现�
 benefit:
 
 1.Streaming Server Rendering - Progressively rendering HTML from the server to the client.
+
 2.Selective Hydration - React prioritizes what components to make interactive first based on user interaction.
 
 参考链接：'https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming'
+
+12. 增加了关于登录部分的 cookie 和 session 的说明
+
+示例参考`server-login`中的`page.tsx`
+
+通过`middleware.ts`进行了身份校验
+
+Tips:其实`session`的概念就是和`cookie`是一样的，都是存储在浏览器中的数据，但是`session`的存储是存储在服务器的，而`cookie`的存储是存储在浏览器中的。
+
+存储在浏览器中的 cookies 数据存在被劫持的风险，而存储在服务器中的 session 数据则相对安全。
+
+通常 session 的管理有两种：
+
+1.基于 cookie 的 session
+
+将敏感信息加密后存储在 cookie 中，每次请求都会携带 cookie，服务器通过解密 cookie 中的信息来获取 session 信息。
+
+2.基于 database 的 session
+
+将敏感信息存储在数据库中，每次请求都会携带 session id，服务器通过查询数据库来获取 session 信息。
+
+参考链接:'https://nextjs.org/docs/app/building-your-application/authentication#session-management'
