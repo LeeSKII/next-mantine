@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient();
+  //开启SQL日志
+  return new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
 };
 
 declare global {
