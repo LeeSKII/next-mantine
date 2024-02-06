@@ -23,7 +23,9 @@ export default async function Page() {
     return (
       <Box key={department.dept_no}>
         {" "}
-        <Link href={`/department/${department.dept_name}`}>
+        <Link
+          href={`/department/${department.dept_name}?dept_no=${department.dept_no}`}
+        >
           <Text>
             {department.dept_no}-{department.dept_name}
           </Text>
