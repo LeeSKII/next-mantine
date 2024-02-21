@@ -22,7 +22,8 @@ export default function Page() {
     if (userName == "admin" && password == "123") {
       cookies().set("user", "admin", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        // secure属性用于指示浏览器，该cookie应该只在通过安全连接（即HTTPS）发送时才被包含在请求中。
+        // secure: process.env.NODE_ENV === "production",
         maxAge: 60 * 60 * 24 * 7, // One week
         path: "/",
       });
