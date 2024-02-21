@@ -74,6 +74,16 @@ export function HeroBullets() {
                 Api Browser
               </Button>
             </Link>
+            <Link href="/department">
+              <Button
+                variant="default"
+                radius="xl"
+                size="md"
+                className={classes.control}
+              >
+                Department
+              </Button>
+            </Link>
           </Group>
         </div>
         <Image src={image.src} className={classes.image} />

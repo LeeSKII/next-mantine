@@ -6,8 +6,9 @@ import {
   Paper,
   Center,
   Stack,
+  Anchor,
 } from "@mantine/core";
-import Link from "next/link";
+import NextLink from "next/link";
 
 import prisma from "@/lib/prisma";
 
@@ -23,13 +24,13 @@ export default async function Page() {
     return (
       <Box key={department.dept_no}>
         {" "}
-        <Link
+        <NextLink
           href={`/department/${department.dept_name}?dept_no=${department.dept_no}`}
         >
           <Text>
             {department.dept_no}-{department.dept_name}
           </Text>
-        </Link>
+        </NextLink>
       </Box>
     );
   });
@@ -37,6 +38,11 @@ export default async function Page() {
   return (
     <Container size={"md"}>
       <Paper mt={"lg"}>
+        <Center>
+          <Anchor component={NextLink} href={"/"}>
+            Go Back
+          </Anchor>
+        </Center>
         <Center>
           <Stack>{DepartmentItems}</Stack>
         </Center>

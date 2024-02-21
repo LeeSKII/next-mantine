@@ -1,9 +1,14 @@
-import { Container, Paper, Box, Title, Text } from "@mantine/core";
+import { Container, Paper, Box, Title, Text, Anchor } from "@mantine/core";
+import NextLink from "next/link";
 import prisma from "@/lib/prisma";
 
 import EmpPagination from "./EmpPagination";
+import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+import Loading from "./loading";
+import { Employees } from "./Employees";
+
+//export const dynamic = "force-dynamic";
 
 const getDeptEmployeesCount = async (dept_no: string) => {
   if (!dept_no) {
@@ -17,29 +22,6 @@ const getDeptEmployeesCount = async (dept_no: string) => {
   return count;
 };
 
-const getDepartmentInfo = async (
-  dept_no: string,
-  current_page: number = 1,
-  row_per_page: number = 20
-) => {
-  if (!dept_no) {
-    return [];
-  }
-
-  const deptEmp = await prisma.dept_emp.findMany({
-    where: {
-      dept_no,
-    },
-    include: {
-      employees: true,
-    },
-    skip: current_page * row_per_page,
-    take: row_per_page,
-  });
-
-  return deptEmp;
-};
-
 export default async function Page({
   params,
   searchParams,
@@ -51,36 +33,37 @@ export default async function Page({
   const count = await getDeptEmployeesCount(dept_no);
   const currentPage = parseInt(current_page) || 1;
   const rowPerPage = parseInt(row_per_page) || 20;
-  const deptInfo = await getDepartmentInfo(dept_no, currentPage, rowPerPage);
-
-  // Render the list of employees
-  const employeeList = deptInfo.map((dept) => {
-    return (
-      <Box key={dept.emp_no} mt={"md"}>
-        {dept.employees.first_name}-{dept.employees.last_name}
-      </Box>
-    );
-  });
 
   return (
     <Container>
-      <Paper>
-        <Box mt={"lg"}>
+      <Paper mt={"lg"}>
+        <Box>
+          <Anchor size={"md"} component={NextLink} href={"/department"}>
+            Go Back
+          </Anchor>
+        </Box>
+        <Box mt={"sm"}>
           <Title order={1}>
             {params.department && decodeURIComponent(params.department)}
           </Title>
-          <Title order={2}>{count}</Title>
-
-          <EmpPagination
-            department={decodeURIComponent(params.department)}
-            dept_no={dept_no}
-            totalNum={count}
-            singleNum={50}
-          ></EmpPagination>
-
-          <Box>
-            <Text size={"md"}>{employeeList}</Text>
-          </Box>
+          <Suspense fallback={<Loading></Loading>}>
+            <Title order={2}>{count}</Title>
+          </Suspense>
+          <Suspense fallback={<Loading></Loading>}>
+            <EmpPagination
+              department={decodeURIComponent(params.department)}
+              dept_no={dept_no}
+              totalNum={count}
+              singleNum={50}
+            ></EmpPagination>
+          </Suspense>
+          <Suspense fallback={<Loading></Loading>}>
+            <Employees
+              dept_no={dept_no}
+              currentPage={currentPage}
+              rowPerPage={rowPerPage}
+            ></Employees>
+          </Suspense>
         </Box>
       </Paper>
     </Container>
