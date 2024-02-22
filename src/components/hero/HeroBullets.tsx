@@ -84,6 +84,16 @@ export function HeroBullets() {
                 Department
               </Button>
             </Link>
+            <Link href="/employees">
+              <Button
+                variant="default"
+                radius="xl"
+                size="md"
+                className={classes.control}
+              >
+                Employees
+              </Button>
+            </Link>
           </Group>
         </div>
         <Image src={image.src} className={classes.image} />
