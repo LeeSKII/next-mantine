@@ -6,25 +6,20 @@ import { EmpPagination } from "./EmpPagination";
 
 export const dynamic = "force-dynamic";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  const page = parseInt(searchParams.page || "1");
+export default async function Page({ params }: { params: { page: string } }) {
+  const page = parseInt(params.page || "1");
+  console.log(page);
   return (
     <Box>
       <Box>
-        <Suspense fallback={null}>
-          <EmpPagination></EmpPagination>
-        </Suspense>
+        <EmpPagination currentPage={page}></EmpPagination>
       </Box>
       <Suspense fallback={<p>Loading faster...</p>}>
-        <GetFastEmployees num={page}></GetFastEmployees>
+        <GetFastEmployees num={10} page={page - 1}></GetFastEmployees>
       </Suspense>
       <Divider></Divider>
       <Suspense fallback={<p>Loading slower...</p>}>
-        <GetSlowEmployees num={page}></GetSlowEmployees>
+        <GetSlowEmployees num={1000} page={page - 1}></GetSlowEmployees>
       </Suspense>
     </Box>
   );

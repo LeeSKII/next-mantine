@@ -34,6 +34,20 @@ export default function Page() {
           <Center h={100}>
             <Box>
               <Title order={3} style={{ color: "black" }}>
+                Mock Employees
+              </Title>
+            </Box>
+          </Center>
+        </Paper>
+        <Paper
+          m={10}
+          withBorder
+          component={Link}
+          href={"/employees/employees/1"}
+        >
+          <Center h={100}>
+            <Box>
+              <Title order={3} style={{ color: "black" }}>
                 Employees
               </Title>
             </Box>
