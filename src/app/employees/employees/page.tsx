@@ -11,19 +11,21 @@ export default async function Page({
 }: {
   searchParams: { page: string };
 }) {
-  const page = parseInt(searchParams.page || "1");
+  const page = Number(searchParams.page || "1");
   return (
     <Box>
       <Box>
-        <Suspense fallback={null}>
-          <EmpPagination></EmpPagination>
-        </Suspense>
+        <EmpPagination></EmpPagination>
       </Box>
-      <Suspense fallback={<p>Loading faster...</p>}>
+      {/* 通过给suspense增加key，实现在后续的路由变换中suspense的fallback可以征程运作 */}
+      <Suspense
+        key={searchParams.page + "A"}
+        fallback={<p>Loading faster...</p>}
+      >
         <GetFastEmployees num={page}></GetFastEmployees>
       </Suspense>
       <Divider></Divider>
-      <Suspense fallback={<p>Loading slower...</p>}>
+      <Suspense key={searchParams.page} fallback={<p>Loading slower...</p>}>
         <GetSlowEmployees num={page}></GetSlowEmployees>
       </Suspense>
     </Box>
